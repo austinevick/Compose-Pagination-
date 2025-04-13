@@ -1,5 +1,7 @@
 package com.austinevick.imagesearchapp.presentation
 
+import androidx.activity.compose.BackHandler
+import androidx.activity.compose.LocalActivity
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
@@ -52,6 +54,7 @@ fun HomeScreen(
     val showDialog = remember { mutableStateOf(false) }
     val image = remember { mutableStateOf("") }
     val title = remember { mutableStateOf("") }
+    val activity = LocalActivity.current
 
 
 
@@ -86,6 +89,14 @@ fun HomeScreen(
                     )
                 }
             ) { innerPadding ->
+
+                BackHandler {
+                    if (targetState) {
+                        showDialog.value = false
+                    } else {
+                        activity?.finish()
+                    }
+                }
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center,
