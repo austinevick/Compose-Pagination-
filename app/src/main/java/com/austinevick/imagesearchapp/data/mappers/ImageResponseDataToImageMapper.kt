@@ -8,6 +8,7 @@ class ImageResponseDataToImageMapper: Mapper<ImageResponseData, Image> {
         return Image(
             id = from.id.toString(),
             imageUrl = from.largeImageURL.toString(),
+            title = from.tags.toString()
         )
     }
 }

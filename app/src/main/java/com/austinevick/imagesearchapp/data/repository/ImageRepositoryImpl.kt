@@ -1,12 +1,12 @@
-package com.austinevick.imagesearchapp.data.remote
+package com.austinevick.imagesearchapp.data.repository
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.austinevick.imagesearchapp.data.mappers.ImageResponseDataToImageMapper
 import com.austinevick.imagesearchapp.data.pagingSource.ImagePagingSource
+import com.austinevick.imagesearchapp.data.remote.ApiService
 import com.austinevick.imagesearchapp.domain.model.Image
 import com.austinevick.imagesearchapp.domain.repository.ImageRepository
-
 
 class ImageRepositoryImpl(
     private val apiService: ApiService,
@@ -23,6 +23,4 @@ class ImageRepositoryImpl(
             pagingSourceFactory = { ImagePagingSource(apiService, query, mapper) }
         )
     }
-
-
 }

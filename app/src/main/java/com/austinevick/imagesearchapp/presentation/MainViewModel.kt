@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.austinevick.imagesearchapp.domain.useCase.GetImagesUseCase
+import com.austinevick.imagesearchapp.domain.useCase.ImageDownloadUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +14,8 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flatMapLatest
 
 class MainViewModel(
-    private val useCase: GetImagesUseCase
+    private val useCase: GetImagesUseCase,
+    private val downloadUseCase: ImageDownloadUseCase
 ) : ViewModel() {
 
     private val query = MutableStateFlow("flowers")
@@ -30,5 +32,13 @@ class MainViewModel(
         query.value = value
     }
 
+    fun downloadImage(url: String) {
+        try {
+        downloadUseCase.invoke(url)
+        }catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+    }
 
 }
